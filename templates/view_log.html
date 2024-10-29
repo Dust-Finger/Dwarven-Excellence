@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Minecraft Log</title>
+    <style>
+      body {
+        font-family: monospace;
+        background-color: #282c34;
+        color: #f1f1f1;
+        padding: 20px;
+      }
+      h1 {
+        color: #61dafb;
+      }
+      .log-content {
+        white-space: pre-wrap;
+        font-size: 14px;
+        line-height: 1.5;
+        background-color: #1e1e1e;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #333;
+        margin-top: 10px;
+      }
+      /* Color-coded classes for log levels */
+      .log-info {
+        color: #8ec07c;  /* Soft green for INFO */
+      }
+      .log-warn {
+        color: #fabd2f;  /* Golden yellow for WARN */
+      }
+      .log-error {
+        color: #fb4934; /* Soft red for ERROR */
+      }
+      /* Legend styling */
+      .legend {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 15px;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .legend-color {
+        width: 15px;
+        height: 15px;
+        border-radius: 3px;
+      }
+      .color-info { background-color: #8ec07c; }
+      .color-warn { background-color: #fabd2f; }
+      .color-error { background-color: #fb4934; }
+    </style>
+  </head>
+  <body>
+    <h1>Minecraft Log File</h1>
+
+    <!-- Legend for log levels -->
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-color color-info"></div>
+        <span>INFO</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color color-warn"></div>
+        <span>WARN</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color color-error"></div>
+        <span>ERROR</span>
+      </div>
+    </div>
+
+    <!-- Log content -->
+    <pre id="log-content" class="log-content">{{ log_content }}</pre>
+    <p><a href="/">Upload another log</a></p>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const logContent = document.getElementById("log-content");
+        let formattedLog = logContent.innerHTML;
+
+        // Wrap each line with a span based on the log level
+        formattedLog = formattedLog
+          .split("\n")
+          .map(line => {
+            if (line.includes("ERROR")) {
+              return `<span class="log-error">${line}</span>`;
+            } else if (line.includes("WARN")) {
+              return `<span class="log-warn">${line}</span>`;
+            } else if (line.includes("INFO")) {
+              return `<span class="log-info">${line}</span>`;
+            } else {
+              return line;
+            }
+          })
+          .join("\n");
+
+        // Apply the formatted log to the content
+        logContent.innerHTML = formattedLog;
+      });
+    </script>
+  </body>
+</html>

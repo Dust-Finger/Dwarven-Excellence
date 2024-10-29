@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Minecraft Log</title>
+    <style>
+      /* General styling */
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #282c34;
+        color: #f1f1f1;
+      }
+      /* Navbar styling */
+      .navbar {
+        width: 100%;
+        background-color: #1e1e1e;
+        padding: 15px 20px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        position: fixed;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1000;
+      }
+      .navbar-title {
+        font-size: 1.2em;
+        color: #61dafb;
+        cursor: pointer;
+      }
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: #1e1e1e;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+        z-index: 1;
+        border-radius: 5px;
+      }
+      .dropdown-content a {
+        color: #f1f1f1;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+      .dropdown-content a:hover {
+        background-color: #333;
+      }
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      /* Main container styling */
+      .upload-container {
+        background-color: #1e1e1e;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+        margin-top: 120px; /* Space for navbar and extra padding */
+      }
+
+      /* Label styling */
+      label {
+        display: block;
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        color: #8ec07c;
+      }
+
+      /* File input styling */
+      input[type="file"] {
+        display: none;
+      }
+
+      /* Custom file upload button */
+      .custom-file-upload {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 1em;
+        color: #f1f1f1;
+        background-color: #61dafb;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        transition: background-color 0.3s ease;
+      }
+      .custom-file-upload:hover {
+        background-color: #4da8c2;
+      }
+
+      /* Submit button styling */
+      button {
+        padding: 10px 20px;
+        font-size: 1em;
+        color: #f1f1f1;
+        background-color: #8ec07c;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      button:hover {
+        background-color: #6fa973;
+      }
+
+      /* Message text */
+      .message {
+        font-size: 0.9em;
+        color: #fabd2f;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar with dropdown -->
+    <div class="navbar">
+      <div class="navbar-title" id="main-title">Minecraft Log Uploader</div>
+      <div class="dropdown">
+        <span class="navbar-title">Menu</span>
+        <div class="dropdown-content">
+          <a href="#" onclick="changeTitle(event)">Log Uploader Tool</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main content container -->
+    <div class="upload-container">
+      <h1 id="page-header">Upload Minecraft Log</h1>
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="file">Choose Minecraft log file:</label>
+
+        <!-- Hidden file input and custom upload button -->
+        <label class="custom-file-upload">
+          <input type="file" name="file" id="file" required>
+          Select File
+        </label>
+
+        <button type="submit">Upload Log</button>
+        <p class="message">Supported file format: .log</p>
+      </form>
+    </div>
+
+    <script>
+      // JavaScript function to change the title and header text
+      function changeTitle(event) {
+        event.preventDefault(); // Prevent link from navigating
+        document.getElementById("main-title").textContent = "Dwarven Excellence";
+        document.getElementById("page-header").textContent = "Dwarven Excellence";
+      }
+    </script>
+  </body>
+</html>
